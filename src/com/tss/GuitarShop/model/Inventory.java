@@ -25,7 +25,8 @@ public class Inventory {
         return null;
     }
 
-    public Guitar search(Guitar searchGuitar) {
+    public List<Guitar> search(Guitar searchGuitar) {
+        List<Guitar> guitarList=new ArrayList<>();
         for (Iterator i = guitars.iterator(); i.hasNext(); ) {
             Guitar guitar = (Guitar)i.next();
 
@@ -39,9 +40,9 @@ public class Inventory {
             if (searchGuitar.getBackWood() != guitar.getBackWood()) continue;
             if (searchGuitar.getTopWood() != guitar.getTopWood()) continue;
 
-            return guitar;
+            guitarList.add(guitar);
         }
-        return null;
+        return guitarList;
     }
 }
 
