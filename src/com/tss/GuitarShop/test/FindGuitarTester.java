@@ -9,11 +9,12 @@ public class FindGuitarTester {
         Inventory inventory=new Inventory();
         initializeInventory(inventory);
 
-        Guitar whatErinLikes=new Guitar("",0, Builder.FENDER,"Stratocastor",
-                Type.ELECTRIC, Wood.ALDER,Wood.ALDER);
+        GuitarSpec whatErinLikes=new GuitarSpec(Builder.FENDER,"Stratocastor",
+                Type.ELECTRIC, Wood.ALDER,Wood.ALDER,10);
 
         List<Guitar> guitars=inventory.search(whatErinLikes);
         if(!guitars.isEmpty()){
+            System.out.println("Matching Guitars: ");
             for(Guitar guitar:guitars){
                 System.out.println(guitar);
             }
@@ -26,7 +27,7 @@ public class FindGuitarTester {
     }
 
     private static void initializeInventory(Inventory inventory) {
-        inventory.addGuitar("V95693", 1499.95, Builder.FENDER,"Stratocastor", Type.ELECTRIC, Wood.ALDER,Wood.ALDER);
-        inventory.addGuitar("V9512", 1549.95, Builder.FENDER, "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        inventory.addGuitar("V95693", 1499.95, new GuitarSpec(Builder.FENDER,"Stratocastor", Type.ELECTRIC, Wood.ALDER,Wood.ALDER,10) );
+        inventory.addGuitar("V9512", 1549.95, new GuitarSpec(Builder.FENDER, "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER,5));
     }
 }
