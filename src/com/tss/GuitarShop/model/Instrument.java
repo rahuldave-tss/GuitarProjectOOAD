@@ -1,15 +1,22 @@
 package com.tss.GuitarShop.model;
 
-public abstract class Instrument {
+import java.util.Map;
+
+public class Instrument {
     private String serialNumber;
     private double price;
+    private InstrumentSpec instrumentSpec;
 
-    public Instrument(String serialNumber, double price) {
+    public Instrument(String serialNumber, double price,InstrumentSpec instrumentSpec) {
         this.serialNumber = serialNumber;
         this.price = price;
+        this.instrumentSpec=instrumentSpec;
     }
 
-    public abstract InstrumentSpec getSpec();
+    public InstrumentSpec getSpec(){
+        return instrumentSpec;
+    }
+
 
     public String getSerialNumber(){
         return serialNumber;
@@ -23,15 +30,18 @@ public abstract class Instrument {
         return price;
     }
 
-    @Override
-    public String toString() {
-        return  this.getClass().getSimpleName()+"{" +
-                "serialNumber='" + serialNumber + '\'' +
-                ", price=" + price + '\'' +
-                ", builder='" + getSpec().getBuilder() + '\'' +
-                ", top wood='" + getSpec().getTopWood() + '\'' +
-                ", back wood='" + getSpec().getBackWood() + '\'' +
-                ", type='" + getSpec().getType() + '\'' +
-                ", model='" + getSpec().getModel() + '\'';
+    public String toString(){
+        StringBuilder sb = new StringBuilder(
+                        "serialNumber='" + getSerialNumber() + '\'' +
+                        ", price=" + getPrice() + '\''
+        );
+        for(Map.Entry<String, Object> entry: getSpec().properties.entrySet()){
+            sb.append(", ")
+                    .append(entry.getKey())
+                    .append("='")
+                    .append(entry.getValue())
+                    .append('\'');
+        }
+        return sb.toString();
     }
 }
